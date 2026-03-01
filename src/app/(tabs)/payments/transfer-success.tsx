@@ -1,0 +1,46 @@
+import React from "react";
+import { View, Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { Button } from "@/components";
+
+export default function TransferSuccessScreen() {
+  const router = useRouter();
+  const { amount, recipient } = useLocalSearchParams<{
+    amount: string;
+    recipient: string;
+  }>();
+
+  return (
+    <SafeAreaView className="flex-1 bg-white">
+      <View className="flex-1 items-center justify-center px-6">
+        <View className="mb-6 h-20 w-20 items-center justify-center rounded-full bg-success-50">
+          <Ionicons name="checkmark-circle" size={48} color="#22C55E" />
+        </View>
+
+        <Text className="text-2xl font-bold text-neutral-900">
+          Transfer Successful!
+        </Text>
+        <Text className="mt-2 text-center text-base text-neutral-500">
+          You sent{" "}
+          <Text className="font-semibold text-neutral-900">£{amount}</Text> to{" "}
+          <Text className="font-semibold text-neutral-900">{recipient}</Text>
+        </Text>
+
+        <View className="mt-8 w-full gap-3">
+          <Button
+            title="Done"
+            onPress={() => router.replace("/(tabs)/payments")}
+          />
+          <Button
+            title="Send Another"
+            variant="outline"
+            onPress={() => router.replace("/(tabs)/payments/transfer")}
+          />
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+}
+

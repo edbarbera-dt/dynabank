@@ -1,21 +1,45 @@
 {
-  "name": "bank-app-demo",
+  "name": "dynabank",
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "seed": "npx tsx scripts/seed.ts"
   },
   "dependencies": {
+    "@expo/vector-icons": "^15.0.2",
+    "@hookform/resolvers": "^5.2.2",
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "@supabase/supabase-js": "^2.98.0",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "expo": "~55.0.4",
+    "expo-constants": "~55.0.7",
+    "expo-crypto": "~55.0.8",
+    "expo-image-picker": "~55.0.10",
+    "expo-linear-gradient": "~55.0.8",
+    "expo-linking": "~55.0.7",
+    "expo-router": "~55.0.3",
+    "expo-splash-screen": "~55.0.10",
     "expo-status-bar": "~55.0.4",
+    "nativewind": "^4.2.2",
     "react": "19.2.0",
-    "react-native": "0.83.2"
+    "react-hook-form": "^7.71.2",
+    "react-native": "0.83.2",
+    "react-native-gesture-handler": "~2.30.0",
+    "react-native-reanimated": "4.2.1",
+    "react-native-safe-area-context": "~5.6.2",
+    "react-native-screens": "~4.23.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/react": "~19.2.2",
+    "dotenv": "^17.3.1",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.21.0",
     "typescript": "~5.9.2"
   },
   "private": true
