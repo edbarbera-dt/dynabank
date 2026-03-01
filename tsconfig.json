@@ -12,6 +12,7 @@
     "**/*.ts",
     "**/*.tsx",
     "src/nativewind-env.d.ts",
-    "global.d.ts"
+    "global.d.ts",
+    "nativewind-env.d.ts"
   ]
 }
