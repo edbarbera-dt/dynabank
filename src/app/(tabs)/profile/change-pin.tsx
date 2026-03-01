@@ -97,7 +97,7 @@ export default function ChangePinScreen() {
               <View className="mt-8">
                 <PinInput
                   length={6}
-                  value={currentPin}
+                  label={currentPin}
                   onComplete={handleCurrentPinComplete}
                 />
               </View>
@@ -115,7 +115,7 @@ export default function ChangePinScreen() {
               <View className="mt-8">
                 <PinInput
                   length={6}
-                  value={newPin}
+                  label={newPin}
                   onComplete={handleNewPinComplete}
                 />
               </View>
@@ -133,7 +133,7 @@ export default function ChangePinScreen() {
               <View className="mt-8">
                 <PinInput
                   length={6}
-                  value={confirmPin}
+                  label={confirmPin}
                   onComplete={handleConfirmPinComplete}
                 />
               </View>

@@ -81,12 +81,18 @@ export default function TransferScreen() {
       );
 
       if (targetAccount) {
-        await transferMoney(fromAccount.id, targetAccount.id, numAmount);
+        await transferMoney(
+          fromAccount.id,
+          targetAccount.id,
+          numAmount,
+          selectedBeneficiary.name,
+        );
       } else {
         await transferToExternal(
           fromAccount.id,
           numAmount,
           selectedBeneficiary.name,
+          selectedBeneficiary.account_number,
         );
       }
 
@@ -142,9 +148,7 @@ export default function TransferScreen() {
                       : "border border-neutral-200 bg-white"
                   }`}
                 >
-                  <Text className="text-xs text-neutral-500">
-                    {acct.account_name}
-                  </Text>
+                  <Text className="text-xs text-neutral-500">{acct.name}</Text>
                   <Text className="mt-1 text-base font-bold text-neutral-900">
                     £{acct.balance.toFixed(2)}
                   </Text>

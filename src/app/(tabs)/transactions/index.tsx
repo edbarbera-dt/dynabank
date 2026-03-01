@@ -130,7 +130,7 @@ export default function TransactionsScreen() {
                       : "text-neutral-600"
                   }`}
                 >
-                  {acct.account_name}
+                  {acct.name}
                 </Text>
               </TouchableOpacity>
             ))}
@@ -168,14 +168,14 @@ export default function TransactionsScreen() {
       <FlatList
         data={groupedTransactions}
         keyExtractor={(item) =>
-          item.type === "header" ? `header-${item.title}` : item.id
+          item.kind === "header" ? `header-${item.title}` : item.id
         }
         contentContainerStyle={{ paddingHorizontal: 24, paddingBottom: 20 }}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
         renderItem={({ item }) => {
-          if (item.type === "header") {
+          if (item.kind === "header") {
             return (
               <Text className="mb-1 mt-4 text-sm font-semibold text-neutral-400">
                 {item.title}
@@ -203,8 +203,8 @@ export default function TransactionsScreen() {
 }
 
 type GroupedItem =
-  | { type: "header"; title: string }
-  | (Transaction & { type: "transaction" });
+  | { kind: "header"; title: string }
+  | (Transaction & { kind: "transaction" });
 
 function groupByDate(transactions: Transaction[]): GroupedItem[] {
   const groups: GroupedItem[] = [];
@@ -224,10 +224,10 @@ function groupByDate(transactions: Transaction[]): GroupedItem[] {
 
     if (dateLabel !== currentDate) {
       currentDate = dateLabel;
-      groups.push({ type: "header", title: dateLabel });
+      groups.push({ kind: "header", title: dateLabel });
     }
 
-    groups.push({ ...txn, type: "transaction" });
+    groups.push({ ...txn, kind: "transaction" });
   }
 
   return groups;

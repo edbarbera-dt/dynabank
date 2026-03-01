@@ -103,10 +103,10 @@ export default function TransactionDetailScreen() {
         {/* Details */}
         <View className="mt-8 px-6">
           <View className="rounded-2xl bg-neutral-50 p-4">
-            {transaction.counterparty && (
+            {transaction.counterparty_name && (
               <DetailRow
                 label={isCredit ? "From" : "To"}
-                value={transaction.counterparty}
+                value={transaction.counterparty_name}
               />
             )}
             <DetailRow label="Date" value={format(date, "d MMM yyyy, HH:mm")} />

@@ -49,6 +49,7 @@ export default function AddBeneficiaryScreen() {
     try {
       await addBeneficiary(user.id, {
         name: name.trim(),
+        bank_name: "DynaBank",
         account_number: accountNumber.trim(),
         sort_code: sortCode.trim(),
       });

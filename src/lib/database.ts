@@ -59,7 +59,7 @@ export interface Beneficiary {
   account_number: string;
   sort_code: string;
   bank_name: string;
-  avatar_url: string | null;
+  avatar_url?: string;
   created_at: string;
 }
 

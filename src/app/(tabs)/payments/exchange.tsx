@@ -93,7 +93,7 @@ export default function ExchangeScreen() {
         from_currency: from,
         to_currency: to,
         rate: 1,
-        created_at: "",
+        updated_at: "",
       };
     return (
       rates.find((r) => r.from_currency === from && r.to_currency === to) ||
@@ -115,7 +115,13 @@ export default function ExchangeScreen() {
 
     setProcessing(true);
     try {
-      await exchangeMoney(fromAccount.id, toAccount.id, numAmount);
+      await exchangeMoney(
+        fromAccount.id,
+        toAccount.id,
+        numAmount,
+        fromAccount.currency,
+        toAccount.currency,
+      );
       router.replace({
         pathname: "/(tabs)/payments/exchange-confirm",
         params: {
@@ -195,7 +201,7 @@ export default function ExchangeScreen() {
                   }`}
                 >
                   <Text className="text-xs text-neutral-500">
-                    {acct.account_name} ({acct.currency})
+                    {acct.name} ({acct.currency})
                   </Text>
                   <Text className="mt-1 text-base font-bold text-neutral-900">
                     {CURRENCY_SYMBOLS[acct.currency] || ""}
@@ -259,7 +265,7 @@ export default function ExchangeScreen() {
                     }`}
                   >
                     <Text className="text-xs text-neutral-500">
-                      {acct.account_name} ({acct.currency})
+                      {acct.name} ({acct.currency})
                     </Text>
                     <Text className="mt-1 text-base font-bold text-neutral-900">
                       {CURRENCY_SYMBOLS[acct.currency] || ""}
