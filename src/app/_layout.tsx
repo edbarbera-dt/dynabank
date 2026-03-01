@@ -1,15 +1,54 @@
 import "../../global.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Slot, useRouter, useSegments } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { AuthProvider, useAuth } from "@/lib/auth";
 import { LoadingSpinner } from "@/components";
 import { View } from "react-native";
+import {
+  Dynatrace,
+  DataCollectionLevel,
+  UserPrivacyOptions,
+  ConfigurationBuilder,
+  LogLevel,
+} from "@dynatrace/react-native-plugin";
 
 function RootLayoutNav() {
   const { user, loading } = useAuth();
   const segments = useSegments();
   const router = useRouter();
+  const hasInitializedDynatrace = useRef(false);
+
+  useEffect(() => {
+    if (hasInitializedDynatrace.current) return;
+    hasInitializedDynatrace.current = true;
+
+    const initializeDynatrace = async () => {
+      const configurationBuilder = new ConfigurationBuilder(
+        "https://bf52479mwb.bf-sprint.dynatracelabs.com/mbeacon",
+        "ab242b75-ce74-49f3-b4b4-45a5acdf042d",
+      );
+
+      configurationBuilder
+        .withCrashReporting(true)
+        .withErrorHandler(true)
+        .withReportFatalErrorAsCrash(true)
+        .withLogLevel(LogLevel.Info)
+        .withLifecycleUpdate(false)
+        .withUserOptIn(false)
+        .withActionNamePrivacy(false);
+
+      await Dynatrace.start(configurationBuilder.buildConfiguration());
+
+      const privacyConfig = new UserPrivacyOptions(
+        DataCollectionLevel.UserBehavior,
+        true,
+      );
+      Dynatrace.applyUserPrivacyOptions(privacyConfig);
+    };
+
+    void initializeDynatrace();
+  }, []);
 
   useEffect(() => {
     if (loading) return;

@@ -3,5 +3,13 @@ const { getDefaultConfig } = require("expo/metro-config");
 
 const config = getDefaultConfig(__dirname);
 
-module.exports = withNativeWind(config, { input: "./global.css" });
+config.transformer = {
+  ...config.transformer,
+  babelTransformerPath:
+    require.resolve("@dynatrace/react-native-plugin/lib/dynatrace-transformer"),
+};
+
+config.reporter = require("@dynatrace/react-native-plugin/lib/dynatrace-reporter");
+
+module.exports = withNativeWind(config, { input: "./src/global.css" });
 

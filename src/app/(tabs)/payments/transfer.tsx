@@ -92,7 +92,7 @@ export default function TransferScreen() {
           fromAccount.id,
           numAmount,
           selectedBeneficiary.name,
-          selectedBeneficiary.account_number,
+          "Transfer to external account",
         );
       }
 
