@@ -28,13 +28,13 @@ A fully functional demo banking app built with React Native + Expo SDK 55 for de
 - Node.js 18+
 - Expo CLI (`npx expo`)
 - [Supabase](https://supabase.com) account (free tier works)
-- iOS Simulator / Android Emulator / Expo Go
+- iOS Simulator / Android Emulator / Expo Go (not working at the moment - waiting for SDK 55 support)
 
 ### 1. Clone & Install
 
 ```bash
 cd bank-app-demo
-npm install --legacy-peer-deps
+npm install
 ```
 
 ### 2. Setup Supabase
@@ -69,9 +69,9 @@ npm run seed
 
 This creates a demo user with:
 
-- **Email**: demo@dynabank.com
-- **Password**: Demo1234!
-- **PIN**: 123456
+- Email
+- Password
+- PIN
 - 2 accounts (Current £4,250.80 + Savings £12,500.00)
 - 35+ realistic transactions over 60 days
 - 2 virtual cards
@@ -84,46 +84,6 @@ npx expo start
 ```
 
 Scan the QR code with Expo Go, or press `i` for iOS simulator / `a` for Android emulator.
-
-## Project Structure
-
-```
-src/
-├── app/
-│   ├── _layout.tsx              # Root layout with auth routing
-│   ├── (auth)/                  # Auth screens
-│   │   ├── welcome.tsx          # Landing page
-│   │   ├── sign-up.tsx          # Registration
-│   │   ├── login.tsx            # Login
-│   │   └── forgot-password.tsx  # Password reset
-│   ├── (onboarding)/            # Onboarding flow
-│   │   ├── choose-account-type.tsx
-│   │   ├── select-country.tsx
-│   │   ├── enter-phone.tsx
-│   │   ├── create-pin.tsx
-│   │   ├── confirm-pin.tsx
-│   │   └── setup-complete.tsx
-│   └── (tabs)/                  # Main app
-│       ├── index.tsx            # Home dashboard
-│       ├── transactions/        # Transaction history & details
-│       ├── payments/            # Transfer, top-up, exchange
-│       ├── cards/               # Card management
-│       └── profile/             # User profile & settings
-├── components/                  # Reusable UI components
-├── lib/
-│   ├── supabase.ts             # Supabase client
-│   ├── auth.tsx                # Auth context & provider
-│   └── database.ts            # Database operations
-└── utils/
-    └── cn.ts                  # ClassName utility
-
-supabase/
-└── migrations/
-    └── 001_initial_schema.sql  # Complete database schema
-
-scripts/
-└── seed.ts                     # Demo data seeder
-```
 
 ## Database Schema
 
