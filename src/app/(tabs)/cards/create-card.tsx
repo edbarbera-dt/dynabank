@@ -14,6 +14,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useAuth } from "@/lib/auth";
 import { getAccounts, createCard, type Account } from "@/lib/database";
 import { Button, LoadingSpinner, Input } from "@/components";
+import { getRandomElement } from "@/lib/utils";
 
 export default function CreateCardScreen() {
   const { user } = useAuth();
@@ -52,17 +53,11 @@ export default function CreateCardScreen() {
       const expiry = generateExpiry();
       const cvv = generateCVV();
 
-      await createCard({
-        user_id: user.id,
-        account_id: selectedAccount.id,
-        card_number: cardNumber,
-        card_name: cardName.trim() || "Virtual Card",
-        expiry_date: expiry,
-        cvv,
-        card_type: "virtual",
-        status: "active",
-        daily_limit: 1000,
-      });
+      await createCard(
+        selectedAccount.id,
+        selectedAccount.name,
+        getRandomElement(["visa", "mastercard"]),
+      );
 
       Alert.alert("Card Created", "Your new virtual card is ready!", [
         { text: "OK", onPress: () => router.back() },
@@ -138,7 +133,7 @@ export default function CreateCardScreen() {
                 >
                   <View>
                     <Text className="text-base font-medium text-neutral-900">
-                      {acct.account_name}
+                      {acct.name}
                     </Text>
                     <Text className="text-sm text-neutral-400">
                       {acct.currency} • £{acct.balance.toFixed(2)}

@@ -115,16 +115,12 @@ export default function CardDetailsScreen() {
             Card Information
           </Text>
           <View className="rounded-2xl bg-neutral-50 p-4">
-            <DetailRow
-              label="Card Type"
-              value={card.card_type === "virtual" ? "Virtual" : "Physical"}
-            />
+            <DetailRow label="Card Type" value={card.card_type} />
             <DetailRow
               label="Card Number"
               value={`•••• •••• •••• ${card.card_number.slice(-4)}`}
             />
             <DetailRow label="Expiry" value={card.expiry_date} />
-            <DetailRow label="CVV" value={card.cvv} />
             <DetailRow
               label="Status"
               value={card.status.charAt(0).toUpperCase() + card.status.slice(1)}
